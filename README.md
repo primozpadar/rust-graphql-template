@@ -4,7 +4,7 @@
 
 - **Actix** - Web server
 - **Juniper** - GraphQL library
-- **DB ORM** - Diesel with PostgreSQL
+- **Diesel** - Database ORM with PostgreSQL
 
 ## Setup ⚙️
 
