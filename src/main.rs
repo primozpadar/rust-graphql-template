@@ -8,9 +8,9 @@ use actix_web::{middleware, web, App, HttpServer};
 use dotenv::dotenv;
 
 mod db;
+mod entities;
 mod graphql;
-mod handlers;
-mod schema;
+mod resolvers;
 
 #[actix_web::main]
 async fn main() -> io::Result<()> {

@@ -1,9 +1,8 @@
 use diesel::prelude::*;
 use juniper::{GraphQLInputObject, GraphQLObject};
 
-use crate::db::{DBResult, PoolConn};
-use crate::schema::placeholder;
-use crate::schema::placeholder::dsl::placeholder as all_placeholders;
+use crate::db::{schema::placeholder, DBResult, PoolConn};
+use placeholder::dsl::placeholder as all_placeholders;
 
 #[derive(GraphQLObject, Queryable)]
 #[graphql(description = "Placeholder object")]

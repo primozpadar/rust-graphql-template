@@ -2,7 +2,7 @@ use actix_web::{web, Error, HttpResponse};
 use juniper::http::{playground::playground_source, GraphQLRequest};
 
 use crate::db::Pool;
-use crate::handlers::root::{create_schema, Context, Schema};
+use crate::resolvers::{create_schema, Context, Schema};
 
 pub async fn graphql(pool: web::Data<Pool>, schema: web::Data<Schema>, data: web::Json<GraphQLRequest>) -> Result<HttpResponse, Error> {
   let ctx = Context {
