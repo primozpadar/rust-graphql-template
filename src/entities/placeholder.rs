@@ -1,7 +1,9 @@
 use diesel::prelude::*;
+use juniper::FieldResult;
 use juniper::{GraphQLInputObject, GraphQLObject};
 
-use crate::db::{schema::placeholder, DBResult, PoolConn};
+use crate::db::{schema::placeholder, PoolConn};
+use crate::entities::result;
 use placeholder::dsl::placeholder as all_placeholders;
 
 #[derive(GraphQLObject, Queryable)]
@@ -18,11 +20,11 @@ pub struct NewPlaceholder {
 }
 
 impl Placeholder {
-  pub fn get_all(conn: &PoolConn) -> DBResult<Vec<Placeholder>> {
-    all_placeholders.load(conn)
+  pub fn get_all(conn: &PoolConn) -> FieldResult<Vec<Placeholder>> {
+    result(all_placeholders.load(conn))
   }
 
-  pub fn create(conn: &PoolConn, data: NewPlaceholder) -> DBResult<Placeholder> {
-    diesel::insert_into(placeholder::table).values(&data).get_result(conn)
+  pub fn create(conn: &PoolConn, data: NewPlaceholder) -> FieldResult<Placeholder> {
+    result(diesel::insert_into(placeholder::table).values(&data).get_result(conn))
   }
 }
