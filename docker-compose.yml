@@ -1,0 +1,32 @@
+version: "3.9"
+
+volumes:
+  db_data:
+
+networks:
+  backend:
+
+services:
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    networks:
+      - backend
+
+  adminer:
+    image: adminer:4-standalone
+    environment:
+      ADMINER_DESIGN: dracula
+      ADMINER_DEFAULT_SERVER: db
+    depends_on:
+      - db
+    ports:
+      - "${ADMINER_PORT}:8080"
+    networks:
+      - backend
